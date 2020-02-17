@@ -13,7 +13,7 @@ public class InfoContacto extends AppCompatActivity {
 
     Button btn2;
     TextView tv_nombre, tv_telefono, tv_email, tv_descripcion, tv_fecha ;
-
+String nombre, telefono, email, descripcion, fecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,15 +21,15 @@ public class InfoContacto extends AppCompatActivity {
         setContentView(R.layout.activity_info_contacto);
 
         Bundle parametros = getIntent().getExtras();
-        String nombre = parametros.getString(getResources().getString(R.string.nombre));
-        String telefono = parametros.getString(getResources().getString(R.string.telefono));
-        String email = parametros.getString(getResources().getString(R.string.email));
-        String descripcion = parametros.getString(getResources().getString(R.string.descripcion));
+        nombre = parametros.getString(getResources().getString(R.string.nombre));
+         telefono = parametros.getString(getResources().getString(R.string.telefono));
+         email = parametros.getString(getResources().getString(R.string.email));
+         descripcion = parametros.getString(getResources().getString(R.string.descripcion));
         String fecha1 = parametros.getString(getResources().getString(R.string.fecha));
         String fecha2 = parametros.getString(getResources().getString(R.string.fecha2));
         String fecha3 = parametros.getString(getResources().getString(R.string.fecha3));
 
-        String fecha = new StringBuilder().append(fecha1).append(fecha2).append(fecha3).toString();
+         fecha = new StringBuilder().append(fecha1).append(fecha2).append(fecha3).toString();
 
         tv_nombre = findViewById(R.id.textView);
         tv_fecha = findViewById(R.id.textView2);
@@ -41,7 +41,7 @@ public class InfoContacto extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(InfoContacto.this, MainActivity.class));
+                showForm();
             }
         });
 
@@ -56,6 +56,15 @@ public class InfoContacto extends AppCompatActivity {
 
 
     }
-
+    public void showForm(){
+        Intent intent = new Intent(InfoContacto.this, MainActivity.class);
+        intent.putExtra(getResources().getString(R.string.nombre), nombre);
+        intent.putExtra(getResources().getString(R.string.fecha), fecha);
+        intent.putExtra(getResources().getString(R.string.telefono), telefono);
+        intent.putExtra(getResources().getString(R.string.email), email);
+        intent.putExtra(getResources().getString(R.string.descripcion), descripcion);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
 
 }

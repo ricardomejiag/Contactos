@@ -55,7 +55,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+           pnombre = data.getExtras().getString(getResources().getString(R.string.nombre));
+            pfecha = data.getExtras().getString(getResources().getString(R.string.fecha));
+            ptelefono = data.getExtras().getString(getResources().getString(R.string.telefono));
+            pemail = data.getExtras().getString(getResources().getString(R.string.email));
+            pdescripcion = data.getExtras().getString(getResources().getString(R.string.descripcion));
 
+            edt.setText(pnombre);
+            edt2.setText(ptelefono);
+            edt3.setText(pemail);
+            edt4.setText(pdescripcion);
+        }
+    }
 
 
 }
